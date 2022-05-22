@@ -1,14 +1,19 @@
 #pragma once
 
-#include <string>
-#include "argsmapper.h"
-#include "../Project/project.h"
-#include "../Info/info.h"
+#include "../Artifact/artifact.h"
+#include "../Breakthrough/breakthrough.h"
 #include "../Config/config.h"
-#include "../Branch/branch.h"
+#include "../Info/info.h"
+#include "../Project/project.h"
+#include "../Utils/Messages/messages.h"
+#include "argsmapper.h"
+#include <exception>
+#include <string>
 
 class ArgsMapper {
-public:
-    explicit ArgsMapper(char* argv[]);
-};
+private:
+  ArgsMapper();
 
+public:
+  static void MapArgs(const int argc, const char *argv[]);
+};
