@@ -38,8 +38,20 @@ void Artifact::CreateArtifact(const std::vector<std::string> &filenames) {
         std::make_unique<Tarfful::Tar>(breakthroughPath + "/artifacts/" +
                                        archiveHash + ".tar");
 
+    std::ifstream ignoreFile(config->getBasePath().parent_path().string() +
+                             "/.stardust-ignore");
+    std::vector<std::string> ignorableFiles;
+    std::string file_entry;
+    while (std::getline(ignoreFile, file_entry)) {
+      ignorableFiles.emplace_back(file_entry);
+    }
+    ignoreFile.close();
+
     for (const auto &file : filenames) {
-      if (file == ".stardust") {
+      if (std::count_if(ignorableFiles.begin(), ignorableFiles.end(),
+                        [&file](auto const &s) {
+                          return s.find(file) != std::string::npos;
+                        })) {
         continue;
       }
 

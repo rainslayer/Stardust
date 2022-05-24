@@ -23,6 +23,8 @@ void Project::GenerateProjectFiles() const {
   Config config(projectName, defaultBreakthrough, {defaultBreakthrough});
   config.WriteConfig(basePath);
 
+  std::ofstream ignoreFile(".stardust-ignore");
+
   std::cout << "Initialized project: " << projectName << '\n'
             << "Working breakthrough: " << defaultBreakthrough << "\n";
 }

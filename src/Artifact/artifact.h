@@ -2,6 +2,7 @@
 
 #include "../Config/config.h"
 #include "Tarfful/src/tarfful.h"
+#include <algorithm>
 #include <ctime>
 #include <filesystem>
 #include <fstream>
