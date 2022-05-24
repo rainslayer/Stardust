@@ -109,7 +109,6 @@ void Artifact::RevertArtifact(const std::string &hash) {
   const auto artifactPath = fs::absolute(
       fs::current_path().string() + "/.stardust/breakthroughs/" +
       config->getCurrentBreakthrough() + "/artifacts/" + hash + ".tar");
-  std::cout << artifactPath << '\n';
   if (fs::exists(artifactPath)) {
     std::cout << "[stardust-info]: Processing files...\n";
     const std::unique_ptr<Tarfful::Tar> archive =
