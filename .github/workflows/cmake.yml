@@ -44,15 +44,18 @@ jobs:
       with:
         name: build-artifact
         path: build
+        
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@master
+        with:
+          name: build-artifact
+          path: build
 
-    - name: Download build artifact
-      uses: actions/download-artifact@master
-      with:
-        name: build-artifact
-        path: build
-
-    - name: Valgrind
-      run: |
+      - name: Valgrind
+        run: |
           sudo apt install -y --no-install-recommends valgrind 
           cd build
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s ./stardust init test_project
