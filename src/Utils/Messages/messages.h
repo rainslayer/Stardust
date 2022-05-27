@@ -41,4 +41,4 @@ constexpr std::string_view SPECIFY_HASH =
 
 constexpr std::string_view ARTIFACT_NOT_FOUND =
     "[stardust-error]: Artifact not found. Please enter the correct hash\n";
-}; // namespace Messages
+} // namespace Messages
