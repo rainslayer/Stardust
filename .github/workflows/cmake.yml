@@ -35,7 +35,7 @@ jobs:
       run: |
         cd stardust_build
         make
-        ls -l
+        
     - name: Upload build artifact
       uses: actions/upload-artifact@master
       with:
@@ -55,7 +55,7 @@ jobs:
       - name: Valgrind
         run: |
           cd stardust_build
-          ls -l
+          chmod +x stardust
           sudo apt install -y --no-install-recommends valgrind 
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s ./stardust init test_project
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s ./stardust add-breakthrough test_breakthrough
