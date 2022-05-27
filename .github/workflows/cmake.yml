@@ -57,6 +57,7 @@ jobs:
 
       - name: Valgrind
         run: |
+          ls -l
           sudo apt install -y --no-install-recommends valgrind 
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s ./stardust init test_project
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s ./stardust add-breakthrough test_breakthrough
