@@ -1,3 +1,4 @@
 // the configured options and settings for stardust
 #define stardust_VERSION_MAJOR @stardust_VERSION_MAJOR@
 #define stardust_VERSION_MINOR @stardust_VERSION_MINOR@
+#define stardust_VERSION_PATCH @stardust_VERSION_PATCH@

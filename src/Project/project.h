@@ -1,30 +1,28 @@
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <filesystem>
-#include <fstream>
 #include "../Config/config.h"
 #include "cereal/archives/binary.hpp"
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 namespace fs = std::filesystem;
 
 class Project {
 private:
-    std::string projectName{};
-    const std::string defaultBranch{"main"};
-    const std::string basePath{".stardust/"};
-    const fs::path defaultBranchPath{this->basePath + "branches/" + this->defaultBranch};
+  std::string projectName = "";
+  const std::string defaultBreakthrough = "main";
+  const std::string basePath = ".stardust/";
+  const fs::path defaultBreakthroughPath =
+      this->basePath + "breakthroughs/" + defaultBreakthrough;
 
-    void InitProject();
+  void InitProject();
 
-    void GenerateProjectFiles() const;
+  void GenerateProjectFiles() const;
 
 public:
-    Project();
+  Project();
 
-    explicit Project(const std::string &projectName);
+  explicit Project(const std::string &projectName);
 };
-
-
-

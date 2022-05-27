@@ -1,59 +1,61 @@
 #pragma once
 
-#include <filesystem>
-#include <fstream>
-#include <sstream>
-#include <iterator>
-#include <string>
+#include "../Utils/Messages/messages.h"
+#include "cereal/archives/binary.hpp"
 #include "cereal/types/string.hpp"
 #include "cereal/types/vector.hpp"
-#include "cereal/archives/binary.hpp"
+#include <exception>
+#include <filesystem>
+#include <fstream>
+#include <iterator>
+#include <sstream>
+#include <string>
 
 namespace fs = std::filesystem;
-using AvailableBranches = std::vector<std::string>;
+using AvailableBreakthroughs = std::vector<std::string>;
 
 class Config {
 private:
-    std::string projectName{};
-    std::string currentBranch{};
-    std::string basePath{};
-    AvailableBranches availableBranches{};
+  std::string projectName;
+  std::string currentBreakthrough;
+  fs::path basePath;
+  AvailableBreakthroughs availableBreakthroughs;
 
 public:
-    Config();
+  Config();
 
-    explicit Config(std::string projectName,
-                    std::string currentBranch,
-                    AvailableBranches availableBranches);
+  explicit Config(const std::string &projectName,
+                  const std::string &currentBreakthrough,
+                  const AvailableBreakthroughs &availableBreakthrough);
 
-    const std::string &getBasePath() const;
+  const std::string getProjectName() const;
 
-    const std::string &getCurrentBranch() const;
+  const fs::path getBasePath() const;
 
-    void setBasePath(const std::string &newBasePath);
+  const std::string getCurrentBreakthrough() const;
 
-    void setCurrentBranch(const std::string &newBranch);
+  void setBasePath(const fs::path &newBasePath);
 
-    const AvailableBranches &getAvailableBranches() const;
+  void setCurrentBreakthrough(const std::string &newBreakthrough);
 
-    void setAvailableBranches(AvailableBranches branchesListUpdated);
+  const AvailableBreakthroughs getAvailableBreakthroughs() const;
 
-    void FindConfig();
+  void setAvailableBreakthrough(
+      const AvailableBreakthroughs &breakthroughsListUpdated);
 
-    void LoadConfig();
+  void FindConfig();
 
-    void WriteConfig(std::string basePath = "") const;
+  void LoadConfig();
 
-    // Required for serialization of class fields
-    template<class Archive>
-    void serialize(Archive &archive) {
-        archive(this->projectName, this->currentBranch,
-                this->availableBranches);
-    }
+  void WriteConfig(std::string basePath = "") const;
 
-    friend std::ostream &operator<<(std::ostream &output, const Config &config);
+  // Required for serialization of class fields
+  template <class Archive> void serialize(const Archive &archive) {
+    archive(this->projectName, this->currentBreakthrough,
+            this->availableBreakthroughs);
+  }
+
+  friend std::ostream &operator<<(std::ostream &output, const Config &config);
 };
 
 std::ostream &operator<<(std::ostream &output, const Config &config);
-
-
