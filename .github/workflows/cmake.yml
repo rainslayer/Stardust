@@ -28,22 +28,19 @@ jobs:
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-
+      run: cmake -B stardust_build
+      
     - name: Build
       # Build your program with the given configuration
       run: |
-        cd build
+        cd stardust_build
         make
-
+        
     - name: Upload build artifact
       uses: actions/upload-artifact@master
       with:
         name: build-artifact
-        path: build
+        path: stardust_build
         
   test:
     runs-on: ubuntu-latest
@@ -53,10 +50,12 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: build-artifact
-          path: build
+          path: stardust_build
 
-      - name: Valgrind
+      - name: Valgrind basic workflow check
         run: |
+          cd stardust_build
+          chmod +x stardust
           sudo apt install -y --no-install-recommends valgrind 
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s ./stardust init test_project
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s ./stardust add-breakthrough test_breakthrough
