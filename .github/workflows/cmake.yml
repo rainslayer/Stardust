@@ -30,11 +30,14 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       run: |
         mkdir build
-        cmake build
+        cd build
+        cmake ..
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake build
+      run: |
+        cd build
+        make
 
     - name: Valgrind
       run: |
