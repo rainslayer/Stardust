@@ -38,7 +38,7 @@ jobs:
       run: |
         cd build
         make
-        ls -l
+        ls -l ..
     - name: Upload build artifact
       uses: actions/upload-artifact@master
       with:
