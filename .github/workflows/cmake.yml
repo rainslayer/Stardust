@@ -36,7 +36,7 @@ jobs:
 
     - name: Valgrind
       run: |
-          apt update && apt install -y --no-install-recommends valgrind 
+          sudo apt install -y --no-install-recommends valgrind 
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s ${{github.workspace}}/build/stardust init test_project
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s ${{github.workspace}}/build/stardust add-breakthrough test_breakthrough
           valgrind --error-exitcode=1 --leak-check=full --trace-children=yes -s echo "test_artifact" | ${{github.workspace}}/build/stardust create-artifact
