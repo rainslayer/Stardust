@@ -39,6 +39,18 @@ jobs:
         cd build
         make
 
+    - name: Upload build artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: build-artifact
+        path: build
+
+    - name: Download build artifact
+      uses: actions/download-artifact@master
+      with:
+        name: build-artifact
+        path: build
+
     - name: Valgrind
       run: |
           sudo apt install -y --no-install-recommends valgrind 
