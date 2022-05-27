@@ -52,7 +52,7 @@ jobs:
           name: build-artifact
           path: stardust_build
 
-      - name: Valgrind
+      - name: Valgrind basic workflow check
         run: |
           cd stardust_build
           chmod +x stardust
