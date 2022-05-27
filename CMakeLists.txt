@@ -16,8 +16,7 @@ add_executable(stardust stardust.cxx
         src/Config/config.cpp src/Config/config.h
         src/Breakthrough/breakthrough.cpp src/Breakthrough/breakthrough.h
         src/Artifact/artifact.cpp src/Artifact/artifact.h
-        src/Utils/Messages/messages.h)
+	)
 
-target_link_libraries(stardust "${CMAKE_CURRENT_SOURCE_DIR}/include/Tarfful/src/tarfful.h")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")

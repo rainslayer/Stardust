@@ -23,7 +23,7 @@ constexpr std::string_view BREAKTHROUGH_DOESNT_EXISTS =
 
 constexpr std::string_view PROJECT_NOT_FOUND =
     "[stardust-error]: Could not find stardust project\n"
-    "Make sure you are in right directory or use\n"
+    "Make sure you are in project root directory or use\n"
     "<stardust init> to initialize new project\n";
 
 constexpr std::string_view PROJECT_ALREDY_EXISTS =

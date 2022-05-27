@@ -34,30 +34,9 @@ void Config::setAvailableBreakthrough(
 }
 
 void Config::FindConfig() {
-  // Read the path from where the program was called
-  auto searchPath{fs::current_path()};
-
-  // Look for project config file in <= 10 upper directories
-  for (size_t nestingIterator = 0, maxNesting = 10;
-       nestingIterator <= maxNesting; ++nestingIterator) {
-    // Iterate over all content of current directory
-    for (const auto &dir_iterator : fs::directory_iterator{searchPath}) {
-      // .stardust is a service directory, if found and wasn't created by user
-      // manually - found root path of project
-      if (dir_iterator.path().string().ends_with(".stardust")) {
-        // Write path to config to class field and break loop over directory
-        // content
-        this->setBasePath(searchPath.string() + "/.stardust");
-        break;
+      if (fs::exists(".stardust/")) {
+        setBasePath(fs::current_path().string() + "/.stardust");
       }
-    }
-    // If basePath was found - break outer loop
-    if (this->basePath.empty()) {
-      searchPath = searchPath.parent_path();
-    } else {
-      break;
-    }
-  }
 }
 
 void Config::LoadConfig() {
@@ -109,6 +88,8 @@ std::ostream &operator<<(std::ostream &output, const Config &config) {
   availableBreakthroughs << ']';
 
   output << "Project: " << config.projectName << '\n'
+         << "Working directory: " << config.getBasePath().parent_path().string()
+         << '\n'
          << "Working breakthrough: " << config.currentBreakthrough << '\n'
          << "Breakthroughs available: " << availableBreakthroughs.str() << "\n";
   return output;
