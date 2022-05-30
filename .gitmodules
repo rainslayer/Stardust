@@ -1,3 +1,7 @@
 [submodule "Tarfful"]
 	path = include/Tarfful
 	url = https://github.com/rainslayer/Tarfful
+
+[submodule "cereal"]
+	path = include/cereal
+	url = https://github.com/USCiLab/cereal

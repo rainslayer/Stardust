@@ -10,49 +10,49 @@ Config::Config(const std::string &projectName,
 
 const std::string Config::getProjectName() const { return projectName; }
 
-const fs::path Config::getBasePath() const { return this->basePath; }
+const fs::path Config::getBasePath() const { return basePath; }
 
 const std::string Config::getCurrentBreakthrough() const {
-  return this->currentBreakthrough;
+  return currentBreakthrough;
 }
 
 void Config::setBasePath(const fs::path &newBasePath) {
-  this->basePath = newBasePath;
+  basePath = newBasePath;
 }
 
 void Config::setCurrentBreakthrough(const std::string &newBreakthrough) {
-  this->currentBreakthrough = newBreakthrough;
+  currentBreakthrough = newBreakthrough;
 }
 
 const AvailableBreakthroughs Config::getAvailableBreakthroughs() const {
-  return this->availableBreakthroughs;
+  return availableBreakthroughs;
 }
 
 void Config::setAvailableBreakthrough(
-    const AvailableBreakthroughs &breakthroughsListUpdated) {
-  this->availableBreakthroughs = std::move(breakthroughsListUpdated);
+        const AvailableBreakthroughs &breakthroughsListUpdated) {
+  availableBreakthroughs = breakthroughsListUpdated;
 }
 
 void Config::FindConfig() {
-      if (fs::exists(".stardust/")) {
-        setBasePath(fs::current_path().string() + "/.stardust");
-      }
+  if (fs::exists(".stardust/")) {
+    setBasePath(fs::current_path().string() + "/.stardust");
+  }
 }
 
 void Config::LoadConfig() {
-  this->FindConfig();
+  FindConfig();
 
-  if (this->basePath.empty()) {
+  if (basePath.empty()) {
     throw std::runtime_error(std::string(Messages::PROJECT_NOT_FOUND));
   }
 
   // Deserialize data from config file and write it into class fields
   {
-    std::ifstream configFile{this->basePath.string() + "/.config"};
+    std::ifstream configFile{basePath.string() + "/.config"};
     cereal::BinaryInputArchive iarchive(configFile);
 
-    iarchive(this->projectName, this->currentBreakthrough,
-             this->availableBreakthroughs);
+    iarchive(projectName, currentBreakthrough,
+             availableBreakthroughs);
   }
   // ================================================================
 }
@@ -60,15 +60,15 @@ void Config::LoadConfig() {
 // For now argument is only passed when initializing project.
 // In all further operations we are going to use basePath deduced by Config
 // class itself.
-void Config::WriteConfig(std::string basePath) const {
-  if (basePath.empty()) {
-    basePath = this->basePath;
+void Config::WriteConfig(std::string path) const {
+  if (path.empty()) {
+    path = basePath;
   }
   // Write config data to file
-  std::ofstream projectConfig{basePath + "/.config"};
+  std::ofstream projectConfig{path + "/.config"};
   cereal::BinaryOutputArchive oarchive(projectConfig);
-  oarchive(this->projectName, this->currentBreakthrough,
-           this->availableBreakthroughs);
+  oarchive(projectName, currentBreakthrough,
+           availableBreakthroughs);
 }
 
 std::ostream &operator<<(std::ostream &output, const Config &config) {

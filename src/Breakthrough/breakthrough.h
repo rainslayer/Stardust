@@ -9,11 +9,11 @@
 #include <string>
 
 class Breakthrough {
-public:
+  public:
   static void CreateBreakthrough(const std::string &breakthroughName);
   static void RemoveBreakthrough(const std::string &breakthroughName);
   static void SwitchBreakthrough(const std::string &breakthroughName);
 
-private:
-  Breakthrough();
+  private:
+  Breakthrough() = default;
 };

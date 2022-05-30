@@ -1,14 +1,5 @@
-/*! \file version.hpp
-    \brief Macros to detect cereal version
-
-    These macros can assist in determining the version of cereal. Be
-    warned that cereal is not guaranteed to be compatible across
-    different versions. For more information on releases of cereal,
-    see https://github.com/USCiLab/cereal/releases.
-
-    \ingroup utility */
 /*
-  Copyright (c) 2018, Shane Grant
+  Copyright (c) 2014, Randolph Voorhies, Shane Grant
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -33,20 +24,29 @@
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "array.hpp"
 
-#ifndef CEREAL_VERSION_HPP_
-#define CEREAL_VERSION_HPP_
+TEST_SUITE_BEGIN("array");
 
-//! The major version
-#define CEREAL_VERSION_MAJOR 1
-//! The minor version
-#define CEREAL_VERSION_MINOR 3
-//! The patch version
-#define CEREAL_VERSION_PATCH 0
+TEST_CASE("binary_array")
+{
+  test_array<cereal::BinaryInputArchive, cereal::BinaryOutputArchive>();
+}
 
-//! The full version as a single number
-#define CEREAL_VERSION (CEREAL_VERSION_MAJOR * 10000 \
-                        + CEREAL_VERSION_MINOR * 100 \
-                        + CEREAL_VERSION_PATCH)
+TEST_CASE("portable_binary_array")
+{
+  test_array<cereal::PortableBinaryInputArchive, cereal::PortableBinaryOutputArchive>();
+}
 
-#endif // CEREAL_VERSION_HPP_
+TEST_CASE("xml_array")
+{
+  test_array<cereal::XMLInputArchive, cereal::XMLOutputArchive>();
+}
+
+TEST_CASE("json_array")
+{
+  test_array<cereal::JSONInputArchive, cereal::JSONOutputArchive>();
+}
+
+TEST_SUITE_END();
