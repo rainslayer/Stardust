@@ -10,18 +10,18 @@
 namespace fs = std::filesystem;
 
 class Project {
-private:
+  private:
   std::string projectName = "";
   const std::string defaultBreakthrough = "main";
   const std::string basePath = ".stardust/";
   const fs::path defaultBreakthroughPath =
-      this->basePath + "breakthroughs/" + defaultBreakthrough;
+          basePath + "breakthroughs/" + defaultBreakthrough;
 
   void InitProject();
 
   void GenerateProjectFiles() const;
 
-public:
+  public:
   Project();
 
   explicit Project(const std::string &projectName);

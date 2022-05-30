@@ -1,21 +1,21 @@
 #include "project.h"
 
-Project::Project() { this->InitProject(); }
+Project::Project() { InitProject(); }
 
 // Use 2nd program argument if passed as name for new project
 Project::Project(const std::string &projectName) : projectName{projectName} {
-  this->InitProject();
+  InitProject();
 }
 
 void Project::InitProject() {
   // Interactively initialize project if not passed by user
-  if (this->projectName.empty()) {
+  if (projectName.empty()) {
     do {
       std::cout << "Enter project name: ";
-      std::getline(std::cin, this->projectName);
-    } while (this->projectName.empty());
+      std::getline(std::cin, projectName);
+    } while (projectName.empty());
   }
-  this->GenerateProjectFiles();
+  GenerateProjectFiles();
 }
 
 void Project::GenerateProjectFiles() const {

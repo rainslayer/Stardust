@@ -14,10 +14,10 @@
 namespace fs = std::filesystem;
 
 class Artifact {
-private:
-  Artifact();
+  private:
+  Artifact() = default;
 
-public:
+  public:
   static std::string GenHash();
 
   static void CreateArtifact(const std::vector<std::string> &filenames);

@@ -15,13 +15,13 @@ namespace fs = std::filesystem;
 using AvailableBreakthroughs = std::vector<std::string>;
 
 class Config {
-private:
+  private:
   std::string projectName;
   std::string currentBreakthrough;
   fs::path basePath;
   AvailableBreakthroughs availableBreakthroughs;
 
-public:
+  public:
   Config();
 
   explicit Config(const std::string &projectName,
@@ -41,7 +41,7 @@ public:
   const AvailableBreakthroughs getAvailableBreakthroughs() const;
 
   void setAvailableBreakthrough(
-      const AvailableBreakthroughs &breakthroughsListUpdated);
+          const AvailableBreakthroughs &breakthroughsListUpdated);
 
   void FindConfig();
 
@@ -50,9 +50,10 @@ public:
   void WriteConfig(std::string basePath = "") const;
 
   // Required for serialization of class fields
-  template <class Archive> void serialize(const Archive &archive) {
-    archive(this->projectName, this->currentBreakthrough,
-            this->availableBreakthroughs);
+  template<class Archive>
+  void serialize(const Archive &archive) {
+    archive(projectName, currentBreakthrough,
+            availableBreakthroughs);
   }
 
   friend std::ostream &operator<<(std::ostream &output, const Config &config);
