@@ -25,4 +25,4 @@ revert-artifact          [artifact hash]               Revert content from artif
 ```
 
 ## Workflow
-TBD...
+![Untitled Diagram drawio(1)](https://user-images.githubusercontent.com/97698199/171161355-aab6c07b-43a3-4944-a944-d093f8372793.png)
